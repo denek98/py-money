@@ -7,10 +7,11 @@ from money.currency import Currency
 from money.currency import CurrencyHelper
 from money.exceptions import InvalidAmountError, CurrencyMismatchError, InvalidOperandError
 
+
 class Money:
     """Class representing a monetary amount"""
 
-    def __init__(self, amount: str, currency: Currency=Currency.USD) -> None:
+    def __init__(self, amount: str, currency: Currency = Currency.USD) -> None:
         self._amount = Decimal(amount)
         self._currency = currency
 
@@ -30,10 +31,10 @@ class Money:
         return self._currency
 
     @classmethod
-    def from_sub_units(cls, sub_units: int, currency: Currency=Currency.USD):
+    def from_sub_units(cls, sub_units: int, currency: Currency = Currency.USD):
         """Creates a Money instance from sub-units."""
         sub_units_per_unit = CurrencyHelper.sub_unit_for_currency(currency)
-        return cls(Decimal(sub_units) / Decimal(sub_units_per_unit), currency)
+        return cls(str((sub_units) / Decimal(sub_units_per_unit)), currency)
 
     @property
     def sub_units(self) -> int:
@@ -41,7 +42,7 @@ class Money:
         sub_units_per_unit = CurrencyHelper.sub_unit_for_currency(self.currency)
         return int(self.amount * sub_units_per_unit)
 
-    def __hash__(self) -> str:
+    def __hash__(self) -> int:
         return hash((self._amount, self._currency))
 
     def __repr__(self) -> str:
@@ -75,14 +76,16 @@ class Money:
         self._assert_same_currency(other)
         return self.amount >= other.amount
 
-    def __eq__(self, other: 'Money') -> bool:
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, Money):
             raise InvalidOperandError
 
         self._assert_same_currency(other)
         return self.amount == other.amount
 
-    def __ne__(self, other: 'Money') -> bool:
+    def __ne__(self, other: object) -> bool:
+        if not isinstance(other, Money):
+            raise InvalidOperandError
         return not self == other
 
     def __bool__(self):
@@ -118,7 +121,7 @@ class Money:
     def __rmul__(self, other: float) -> 'Money':
         return self.__mul__(other)
 
-    def __div__(self, other: float) -> 'Money':
+    def __div__(self, other: float) -> Union['Money', float]:
         return self.__truediv__(other)
 
     def __truediv__(self, other: Union['Money', float]) -> Union['Money', float]:
@@ -169,7 +172,7 @@ class Money:
     def __abs__(self) -> 'Money':
         return self.__class__(str(abs(self._amount)), self._currency)
 
-    def format(self, locale: str='en_US') -> str:
+    def format(self, locale: str = 'en_US') -> str:
         """Returns a string of the currency formatted for the specified locale"""
 
         return format_currency(self.amount, self.currency.name, locale=locale)
@@ -182,9 +185,6 @@ class Money:
     def _round(amount: Decimal, currency: Currency) -> Decimal:
         sub_units = CurrencyHelper.sub_unit_for_currency(currency)
         # rstrip is necessary because quantize treats 1. differently from 1.0
-        rounded_to_subunits = amount.quantize(Decimal(str(1 / sub_units).rstrip('0')),\
-                                              rounding=ROUND_HALF_UP)
+        rounded_to_subunits = amount.quantize(Decimal(str(1 / sub_units).rstrip('0')), rounding=ROUND_HALF_UP)
         decimal_precision = CurrencyHelper.decimal_precision_for_currency(currency)
-        return rounded_to_subunits.quantize(\
-                   Decimal(str(1 / (10 ** decimal_precision)).rstrip('0')),\
-                   rounding=ROUND_HALF_UP)
+        return rounded_to_subunits.quantize(Decimal(str(1 / (10**decimal_precision)).rstrip('0')), rounding=ROUND_HALF_UP)
