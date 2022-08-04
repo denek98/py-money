@@ -2,7 +2,8 @@
 
 from enum import Enum
 
-#pylint: disable=too-many-lines
+# pylint: disable=too-many-lines
+
 
 class Currency(Enum):
     """Enumerates all supported currencies"""
@@ -105,7 +106,7 @@ class Currency(Enum):
     MMK = 'MMK'
     MNT = 'MNT'
     MOP = 'MOP'
-    MRO = 'MRO'
+    MRU = 'MRU'
     MUR = 'MUR'
     MVR = 'MVR'
     MWK = 'MWK'
@@ -190,10 +191,11 @@ class Currency(Enum):
     ZMW = 'ZMW'
     ZWL = 'ZWL'
 
+
 class CurrencyHelper:
     """Utilities for currencies"""
 
-    _CURRENCY_DATA = {
+    _CURRENCY_DATA: dict = {
         Currency.AED: {
             'display_name': 'UAE Dirham',
             'numeric_code': 784,
@@ -288,7 +290,7 @@ class CurrencyHelper:
             'display_name': 'Burundi Franc',
             'numeric_code': 108,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.BMD: {
             'display_name': 'Bermudian Dollar',
@@ -345,7 +347,7 @@ class CurrencyHelper:
             'sub_unit': 1,
         },
         Currency.BYN: {
-            'display_name': 'Belarusian Ruble',
+            'display_name': 'New Belarusian Ruble',
             'numeric_code': 933,
             'default_fraction_digits': 2,
             'sub_unit': 100,
@@ -389,13 +391,13 @@ class CurrencyHelper:
         Currency.CLF: {
             'display_name': 'Unidades de fomento',
             'numeric_code': 990,
-            'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'default_fraction_digits': 4,
+            'sub_unit': 10000,
         },
         Currency.CLP: {
             'display_name': 'Chilean Peso',
             'numeric_code': 152,
-            'default_fraction_digits': 0,
+            'default_fraction_digits': 2,
             'sub_unit': 100,
         },
         Currency.CNY: {
@@ -450,7 +452,7 @@ class CurrencyHelper:
             'display_name': 'Djibouti Franc',
             'numeric_code': 262,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.DKK: {
             'display_name': 'Danish Krone',
@@ -540,7 +542,7 @@ class CurrencyHelper:
             'display_name': 'Guinea Franc',
             'numeric_code': 324,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.GTQ: {
             'display_name': 'Quetzal',
@@ -585,10 +587,10 @@ class CurrencyHelper:
             'sub_unit': 100,
         },
         Currency.IDR: {
-            'display_name': 'Rupiah',
+            'display_name': 'Indonesian Rupiah',
             'numeric_code': 360,
-            'default_fraction_digits': 2,
-            'sub_unit': 100,
+            'default_fraction_digits': 0,
+            'sub_unit': 1,
         },
         Currency.ILS: {
             'display_name': 'New Israeli Sheqel',
@@ -618,7 +620,7 @@ class CurrencyHelper:
             'display_name': 'Iceland Krona',
             'numeric_code': 352,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.JMD: {
             'display_name': 'Jamaican Dollar',
@@ -660,7 +662,7 @@ class CurrencyHelper:
             'display_name': 'Comoro Franc',
             'numeric_code': 174,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.KPW: {
             'display_name': 'North Korean Won',
@@ -672,7 +674,7 @@ class CurrencyHelper:
             'display_name': 'Won',
             'numeric_code': 410,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.KWD: {
             'display_name': 'Kuwaiti Dinar',
@@ -782,8 +784,8 @@ class CurrencyHelper:
             'default_fraction_digits': 2,
             'sub_unit': 100,
         },
-        Currency.MRO: {
-            'display_name': 'Ouguiya',
+        Currency.MRU: {
+            'display_name': 'Mauritanian ouguiya',
             'numeric_code': 478,
             'default_fraction_digits': 2,
             'sub_unit': 5,
@@ -912,7 +914,7 @@ class CurrencyHelper:
             'display_name': 'Guarani',
             'numeric_code': 600,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.QAR: {
             'display_name': 'Qatari Rial',
@@ -942,7 +944,7 @@ class CurrencyHelper:
             'display_name': 'Rwanda Franc',
             'numeric_code': 646,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.SAR: {
             'display_name': 'Saudi Riyal',
@@ -1098,7 +1100,7 @@ class CurrencyHelper:
             'display_name': 'Uganda Shilling',
             'numeric_code': 800,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.USD: {
             'display_name': 'US Dollar',
@@ -1122,7 +1124,7 @@ class CurrencyHelper:
             'display_name': 'Uruguay Peso en Unidades Indexadas (URUIURUI)',
             'numeric_code': 940,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.UYU: {
             'display_name': 'Peso Uruguayo',
@@ -1146,7 +1148,7 @@ class CurrencyHelper:
             'display_name': 'Dong',
             'numeric_code': 704,
             'default_fraction_digits': 0,
-            'sub_unit': 10,
+            'sub_unit': 1,
         },
         Currency.VUV: {
             'display_name': 'Vatu',
@@ -1164,43 +1166,43 @@ class CurrencyHelper:
             'display_name': 'CFA Franc BEAC',
             'numeric_code': 950,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XAG: {
             'display_name': 'Silver',
             'numeric_code': 961,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XAU: {
             'display_name': 'Gold',
             'numeric_code': 959,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XBA: {
             'display_name': 'Bond Markets Unit European Composite Unit (EURCO)',
             'numeric_code': 955,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XBB: {
             'display_name': 'Bond Markets Unit European Monetary Unit (E.M.U.-6)',
             'numeric_code': 956,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XBC: {
             'display_name': 'Bond Markets Unit European Unit of Account 9 (E.U.A.-9)',
             'numeric_code': 957,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XBD: {
             'display_name': 'Bond Markets Unit European Unit of Account 17 (E.U.A.-17)',
             'numeric_code': 958,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XCD: {
             'display_name': 'East Caribbean Dollar',
@@ -1212,55 +1214,55 @@ class CurrencyHelper:
             'display_name': 'SDR (Special Drawing Right)',
             'numeric_code': 960,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XFU: {
             'display_name': 'UIC-Franc',
             'numeric_code': 958,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XOF: {
             'display_name': 'CFA Franc BCEAO',
             'numeric_code': 952,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XPD: {
             'display_name': 'Palladium',
             'numeric_code': 964,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XPF: {
             'display_name': 'CFP Franc',
             'numeric_code': 953,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XPT: {
             'display_name': 'Platinum',
             'numeric_code': 962,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XSU: {
             'display_name': 'Sucre',
             'numeric_code': 994,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XTS: {
             'display_name': 'Codes specifically reserved for testing purposes',
             'numeric_code': 963,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.XUA: {
             'display_name': 'ADB Unit of Account',
             'numeric_code': 965,
             'default_fraction_digits': 0,
-            'sub_unit': 100,
+            'sub_unit': 1,
         },
         Currency.YER: {
             'display_name': 'Yemeni Rial',
@@ -1285,7 +1287,7 @@ class CurrencyHelper:
             'numeric_code': 932,
             'default_fraction_digits': 2,
             'sub_unit': 100,
-        }
+        },
     }
     """Data about currencies.
 
