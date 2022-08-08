@@ -21,24 +21,25 @@ class Money:
     @property
     def amount(self) -> Decimal:
         """Returns the numeric amount"""
-
         return self._amount
 
     @property
     def currency(self) -> Currency:
         """Returns the currency"""
-
         return self._currency
 
     @classmethod
     def from_sub_units(cls, sub_units: int, currency: Currency = Currency.USD):
-        """Creates a Money instance from sub-units."""
+        """Creates a Money instance from sub-units"""
         sub_units_per_unit = CurrencyHelper.sub_unit_for_currency(currency)
         return cls(str((sub_units) / Decimal(sub_units_per_unit)), currency)
 
     @property
     def sub_units(self) -> int:
-        """Converts the amount to sub-units"""
+        """
+        Converts the amount to sub-units\n
+        If currency doesn't have any sub-units the same value will be returned
+        """
         sub_units_per_unit = CurrencyHelper.sub_unit_for_currency(self.currency)
         return int(self.amount * sub_units_per_unit)
 
@@ -174,7 +175,6 @@ class Money:
 
     def format(self, locale: str = 'en_US') -> str:
         """Returns a string of the currency formatted for the specified locale"""
-
         return format_currency(self.amount, self.currency.name, locale=locale)
 
     def _assert_same_currency(self, other: 'Money') -> None:
@@ -183,6 +183,7 @@ class Money:
 
     @staticmethod
     def _round(amount: Decimal, currency: Currency) -> Decimal:
+        """Method to normilize input value considering sub-units for its currency"""
         sub_units = CurrencyHelper.sub_unit_for_currency(currency)
         # rstrip is necessary because quantize treats 1. differently from 1.0
         return amount.quantize(Decimal(str(1 / sub_units).rstrip('0')), rounding=ROUND_HALF_UP)
