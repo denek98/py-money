@@ -9,6 +9,7 @@ from money.exceptions import InvalidAmountError, CurrencyMismatchError, InvalidO
 # pylint: disable=unneeded-not,expression-not-assigned,no-self-use,missing-docstring
 # pylint: disable=misplaced-comparison-constant,singleton-comparison,too-many-public-methods
 
+
 class TestMoney:
     """Money tests"""
 
@@ -46,6 +47,10 @@ class TestMoney:
     def test_sub_units(self):
         money = Money('1.01', Currency.USD)
         assert money.sub_units == 101
+
+        # sub-units of nonfractional currency equals given value
+        money = Money('5', Currency.JPY)
+        assert money.sub_units == 5
 
     def test_hash(self):
         assert hash(Money('1.2')) == hash(Money('1.2', Currency.USD))
@@ -158,11 +163,6 @@ class TestMoney:
         assert Money('9.95') * 0.15 == Money('1.49')
         assert Money('3', Currency.JPY) * 0.2 == Money('1', Currency.JPY)
         assert Money('3', Currency.KRW) * 1.5 == Money('5', Currency.KRW)
-
-        # since GNF has different subunits than JPY, the results are different even though
-        # they have the same final decimal precision. hopefully this behavior is correct...
-        assert Money('3', Currency.JPY) * 1.4995 == Money('4', Currency.JPY)
-        assert Money('3', Currency.GNF) * 1.4995 == Money('5', Currency.GNF)
 
         with pytest.raises(InvalidOperandError):
             Money('5.5') * Money('1.2')
